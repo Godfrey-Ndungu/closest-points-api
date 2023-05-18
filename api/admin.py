@@ -3,15 +3,16 @@ from .models import Point
 from .models import ClosestPoint
 
 
-@admin.register(Point)
 class PointAdmin(admin.ModelAdmin):
-    list_display = ("x", "y", "created_at", "updated_at")
-    list_filter = ("created_at", "updated_at")
-    search_fields = ("x", "y")
+    list_display = ('id', 'created_at', 'points')
+    list_filter = ('created_at',)
+    search_fields = ('points',)
 
 
-@admin.register(ClosestPoint)
 class ClosestPointAdmin(admin.ModelAdmin):
-    list_display = ('point', 'closest_point')
-    search_fields = ('point__x', 'point__y',
-                     'closest_point__x', 'closest_point__y')
+    list_display = ('id', 'point', 'closest_points')
+    search_fields = ('points__point', 'closest_points')
+
+
+admin.site.register(ClosestPoint, ClosestPointAdmin)
+admin.site.register(Point, PointAdmin)
