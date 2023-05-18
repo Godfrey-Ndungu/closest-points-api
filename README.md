@@ -22,3 +22,10 @@ OR
   python3 manage.py migrate
   python3 manage.py runserver
 ```
+Using Docker
+
+```bash
+  docker build -t location .
+  docker run -p 8000:8000 location
+
+```
