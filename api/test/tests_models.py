@@ -13,7 +13,11 @@ class PointModelTest(TestCase):
         self.assertTrue(new_points.created_at)
         self.assertTrue(
             timezone.now() - new_points.created_at < timezone.timedelta(seconds=1)  # noqa
-        )  # noqa
+        )
+
+    def test_str_representation(self):
+        point = Point.objects.create(points="2,2;-1,30;20,11;4,5")
+        self.assertEqual(str(point), "Points: 2,2;-1,30;20,11;4,5")
 
 
 class ClosestPointModelTest(TestCase):
