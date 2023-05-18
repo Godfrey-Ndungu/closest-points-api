@@ -1,5 +1,6 @@
-# django-minimal-cookiecutter
-Django minimum cookiecutter with sqlite.db ,tox,gitlabci,circleci,sphinx-docs,DRF,DRF-swagger,Docker
+# closest-points-api
+Django application that provides an API for finding the closest points on a grid
+
 
 ## Environment Variables
 
