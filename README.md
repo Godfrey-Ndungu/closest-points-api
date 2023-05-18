@@ -6,7 +6,9 @@ Django minimum cookiecutter with sqlite.db ,tox,gitlabci,circleci,sphinx-docs,DR
 To run this project, you will need to add the following environment variables to your .env file
 
 `SECRET_KEY` 
+
 `ALLOWED_HOSTS` 
+
 `DEBUG` 
 
 ## Run Locally
@@ -29,3 +31,11 @@ Using Docker
   docker run -p 8000:8000 location
 
 ```
+## Running Tests
+
+To run tests, run the following command
+
+```bash
+  tox
+```
+
