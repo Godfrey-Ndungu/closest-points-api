@@ -2,61 +2,44 @@ from django.db import models
 
 
 class Point(models.Model):
-    """
-    Represents a point on a grid with timestamped capabilities.
-    """
+    """Model to store a set of points on a grid."""
 
-    x = models.IntegerField()
-    y = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return f"Point({self.x}, {self.y})"
+    points = models.CharField(max_length=255)
 
     @classmethod
-    def create(cls, x, y):
+    def create(cls, points):
         """
-        Creates a new Point instance with the given coordinates.
+        Create a new Points object.
 
-        Args:
-            x (int): The x-coordinate of the point.
-            y (int): The y-coordinate of the point.
-
-        Returns:
-            Point: The newly created Point instance.
+        :param points: The points as a string.
+        :type points: str
+        :return: The created Points object.
+        :rtype: Points
         """
-        point = cls(x=x, y=y)
-        point.save()
-        return point
+        new_points = cls(points=points)
+        new_points.save()
+        return new_points
 
 
 class ClosestPoint(models.Model):
-    """
-    Represents the closest points to a given point on a grid.
-    """
+    """Model to store closestpoints on a grid."""
 
     point = models.OneToOneField(Point, on_delete=models.CASCADE)
-    closest_point = models.OneToOneField(
-        Point, related_name="closest_to", on_delete=models.CASCADE
-    )
-
-    def __str__(self):
-        return f"ClosestPoint(Point: {self.point}, Closest Point: {self.closest_point})"  # noqa
+    closest_points = models.CharField(max_length=255)
 
     @classmethod
-    def create(cls, point, closest_point):
+    def create(cls, point, closest_points):
         """
-        Creates a new ClosestPoint instance with
-        the given point and closest_point.
+        Create a new ClosestPoint object.
 
-        Args:
-            point (Point): The reference point.
-            closest_point (Point): The closest point to the reference point.
-
-        Returns:
-            ClosestPoint: The newly created ClosestPoint instance.
+        :param points: The associated Points object.
+        :type points: Points
+        :param closest_points: The closest points as a string.
+        :type closest_points: str
+        :return: The created ClosestPoint object.
+        :rtype: ClosestPoint
         """
-        closest_point = cls(point=point, closest_point=closest_point)
-        closest_point.save()
-        return closest_point
+        new_closest_point = cls(point=point, closest_points=closest_points)
+        new_closest_point.save()
+        return new_closest_point
