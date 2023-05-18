@@ -11,7 +11,9 @@ class PointModelTest(TestCase):
 
         self.assertEqual(new_points.points, points)
         self.assertTrue(new_points.created_at)
-        self.assertTrue(timezone.now() - new_points.created_at < timezone.timedelta(seconds=1)) # noqa
+        self.assertTrue(
+            timezone.now() - new_points.created_at < timezone.timedelta(seconds=1)
+        )  # noqa
 
 
 class ClosestPointModelTest(TestCase):
@@ -20,7 +22,8 @@ class ClosestPointModelTest(TestCase):
         closest_points_data = "2,2;4,5"
         point = Point.create(point_data)
         closest_point = ClosestPoint.create(
-            point=point, closest_points=closest_points_data)
+            point=point, closest_points=closest_points_data
+        )
 
         self.assertEqual(closest_point.point, point)
         self.assertEqual(closest_point.closest_points, closest_points_data)

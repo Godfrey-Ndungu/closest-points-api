@@ -45,7 +45,9 @@ class ClosestPointFinder:
             of points in the format "x,y;x,y".
         :rtype: str
         """
-        points = [ClosestPointFinder.parse_point(p) for p in point_string.split(";")] # noqa
+        points = [
+            ClosestPointFinder.parse_point(p) for p in point_string.split(";")
+        ]  # noqa
 
         if len(points) < 2:
             raise ValueError("At least two points are required.")
@@ -55,7 +57,9 @@ class ClosestPointFinder:
 
         for i in range(len(points)):
             for j in range(i + 1, len(points)):
-                distance = ClosestPointFinder.calculate_distance(points[i], points[j]) # noqa
+                distance = ClosestPointFinder.calculate_distance(
+                    points[i], points[j]
+                )  # noqa
                 if distance < min_distance:
                     min_distance = distance
                     closest_point = (points[i], points[j])
