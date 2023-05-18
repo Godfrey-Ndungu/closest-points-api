@@ -29,3 +29,34 @@ class Point(models.Model):
         point = cls(x=x, y=y)
         point.save()
         return point
+
+
+class ClosestPoint(models.Model):
+    """
+    Represents the closest points to a given point on a grid.
+    """
+
+    point = models.OneToOneField(Point, on_delete=models.CASCADE)
+    closest_point = models.OneToOneField(
+        Point, related_name="closest_to", on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return f"ClosestPoint(Point: {self.point}, Closest Point: {self.closest_point})"  # noqa
+
+    @classmethod
+    def create(cls, point, closest_point):
+        """
+        Creates a new ClosestPoint instance with
+        the given point and closest_point.
+
+        Args:
+            point (Point): The reference point.
+            closest_point (Point): The closest point to the reference point.
+
+        Returns:
+            ClosestPoint: The newly created ClosestPoint instance.
+        """
+        closest_point = cls(point=point, closest_point=closest_point)
+        closest_point.save()
+        return closest_point
