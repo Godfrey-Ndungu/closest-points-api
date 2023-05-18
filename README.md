@@ -40,3 +40,24 @@ To run tests, run the following command
   tox
 ```
 
+## API Reference
+
+#### DRF-Browsable-API
+
+```http
+  /closest-point/
+```
+#### Post item
+
+```http
+  POST /closest-point/
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `points`      | `string` | **Required**.|
+
+## Redoc Documentation
+
+127.0.0.1:8000
+
