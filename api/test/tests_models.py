@@ -12,7 +12,7 @@ class PointModelTest(TestCase):
         self.assertEqual(new_points.points, points)
         self.assertTrue(new_points.created_at)
         self.assertTrue(
-            timezone.now() - new_points.created_at < timezone.timedelta(seconds=1)
+            timezone.now() - new_points.created_at < timezone.timedelta(seconds=1)  # noqa
         )  # noqa
 
 
