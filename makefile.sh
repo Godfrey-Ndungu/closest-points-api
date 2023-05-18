@@ -23,6 +23,7 @@ install-packages:
 create-env:
     echo "SECRET_KEY=<your-secret-key>" > .env
     echo "ALLOWED_HOSTS=*" >> .env
+    echo "DEBUG=True" >> .env
 
 # Apply migrations
 migrate:
