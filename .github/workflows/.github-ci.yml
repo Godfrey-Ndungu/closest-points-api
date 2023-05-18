@@ -1,0 +1,30 @@
+name: Security and Compatibility Tests
+
+on: [push]
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Python security tests and known gaps
+        run: |
+          pip install bandit
+          bandit  --exclude tests -r .
+      - name: Ubuntu security tests
+        run: |
+          sudo apt update && sudo apt install -y lynis
+          lynis audit system --quick --auditor "The Auditor"
+      - name: Check for sensitive information
+        run: |
+          grep -r -E "(SECRET_KEY|DB_PASSWORD|API_KEY)" .
+      - name: Check for vulnerabilities in dependencies
+        run: |
+          pip install safety
+          safety check -r requirements.txt --full-report
+        continue-on-error: true
+      - name: Test for future compatibility
+        run: |
+          python -Werror::FutureWarning 
+        continue-on-error: true
