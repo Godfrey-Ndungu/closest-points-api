@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.utils import timezone
 from api.models import Point
+from api.models import ClosestPoint
 
 
 class PointModelTestCase(TestCase):
@@ -45,3 +46,25 @@ class PointModelTestCase(TestCase):
         self.assertEqual(point.updated_at.hour, current_time.hour)
         self.assertEqual(point.updated_at.minute, current_time.minute)
         self.assertEqual(point.updated_at.second, current_time.second)
+
+
+class ClosestPointModelTestCase(TestCase):
+    def setUp(self):
+        self.point1 = Point.create(2, 2)
+        self.point2 = Point.create(-1, 30)
+        self.closest_point = ClosestPoint.create(self.point1, self.point2)
+
+    def test_create_closest_point(self):
+        """
+        Test creating a new ClosestPoint instance.
+        """
+        self.assertIsInstance(self.closest_point, ClosestPoint)
+        self.assertEqual(self.closest_point.point, self.point1)
+        self.assertEqual(self.closest_point.closest_point, self.point2)
+
+    def test_str_representation(self):
+        """
+        Test the string representation of ClosestPoint.
+        """
+        expected_str = f"ClosestPoint(Point: {self.point1}, Closest Point: {self.point2})"  # noqa
+        self.assertEqual(str(self.closest_point), expected_str)
