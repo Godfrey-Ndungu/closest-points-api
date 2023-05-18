@@ -7,6 +7,15 @@ class Point(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     points = models.CharField(max_length=255)
 
+    def __str__(self):
+        """
+        Return a string representation of the Point object.
+
+        :return: String representation of the Point object.
+        :rtype: str
+        """
+        return f"Points: {self.points}"
+
     @classmethod
     def create(cls, points):
         """
